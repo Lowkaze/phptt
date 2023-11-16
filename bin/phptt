@@ -1,0 +1,30 @@
+<?php
+
+declare(strict_types=1);
+
+require __DIR__ . '/../vendor/autoload.php';
+
+use Lowkaze\PHPtt\ParseCliArguments;
+
+[
+    'data' => $data,
+    'method' => $method,
+    'url' => $url
+] = call_user_func(new ParseCliArguments());
+
+$request = curl_init($url);
+
+curl_setopt_array($request, [
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_CUSTOMREQUEST => $method,
+    CURLOPT_FAILONERROR => true,
+    CURLOPT_SSL_VERIFYPEER => false,
+]);
+
+$response = curl_exec($request);
+
+if (curl_errno($request)) {
+    exit(curl_error($request));
+}
+
+echo $response;

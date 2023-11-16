@@ -1,0 +1,8 @@
+{
+    "name": "lowkaze/phptt",
+    "autoload": {
+        "psr-4": {
+            "Lowkaze\\PHPtt\\": "src/"
+        }
+    }
+}
